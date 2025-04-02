@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traider Game</title>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+        }
+        canvas {
+            border: 1px solid #333;
+            background: #111;
+        }
+        #debug-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: #0f0;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre;
+        }
+        .ui-element {
+            position: absolute;
+            display: none;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+        #pause-menu, #settings-menu, #death-screen {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        button {
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="debug-info"></div>
+        
+        <!-- Game UI -->
+        <div id="pause-menu" class="ui-element">
+            <h2>Paused</h2>
+            <button id="resume-button">Resume</button>
+            <button id="settings-button">Settings</button>
+        </div>
+        
+        <div id="settings-menu" class="ui-element">
+            <h2>Settings</h2>
+            <div>
+                <label for="control-mode">Control Mode:</label>
+                <select id="control-mode">
+                    <option value="laptop">Laptop (Arrow Keys)</option>
+                    <option value="desktop">Desktop (WASD)</option>
+                </select>
+            </div>
+            <button id="save-settings">Save</button>
+            <button id="back-to-pause">Back</button>
+        </div>
+        
+        <div id="death-screen" class="ui-element">
+            <h2>You Died!</h2>
+            <button id="respawn-button">Respawn</button>
+        </div>
+        
+        <div id="trade-menu" class="menu" style="display: none;">
+            <div class="menu-content">
+                <h2>Trade</h2>
+                <div class="trade-container">
+                    <div class="inventory-section">
+                        <h3>Your Inventory</h3>
+                        <div id="player-inventory" class="inventory-list"></div>
+                    </div>
+                    <div class="inventory-section">
+                        <h3>NPC Inventory</h3>
+                        <div id="npc-inventory" class="inventory-list"></div>
+                    </div>
+                </div>
+                <div class="trade-buttons">
+                    <button onclick="executeTrade()">Trade</button>
+                    <button onclick="handleTrading()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="game2_new.js"></script>
+</body>
+</html>
